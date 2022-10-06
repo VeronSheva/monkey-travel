@@ -1,7 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eaf30266-8d56-49fe-bfb7-2f09a852caea" name="Default Changelist" comment="" />
+    <list default="true" id="eaf30266-8d56-49fe-bfb7-2f09a852caea" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/monkey-travel.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/console" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/cache.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine_migrations.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/routing.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/preload.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes/framework.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220926110029.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220926114117.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220926123821.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220926140335.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220926140509.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220926140756.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220926142815.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220926195443.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TripController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTO/TripDTO.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Trip.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/TripListItem.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/TripListResponse.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/TripRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Serializer/DTOSerializer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/TripService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +65,7 @@
     </execution>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/--" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -154,7 +205,7 @@
       <workItem from="1664044646523" duration="1321000" />
       <workItem from="1664099518049" duration="8735000" />
       <workItem from="1664190821250" duration="37206000" />
-      <workItem from="1664709780036" duration="4727000" />
+      <workItem from="1664709780036" duration="7007000" />
     </task>
     <servers />
   </component>
