@@ -7,6 +7,7 @@ use App\Entity\Trip;
 use App\Model\TripListItem;
 use App\Model\TripListResponse;
 use App\Repository\TripRepository;
+use Doctrine\Common\Collections\Criteria;
 
 class TripService
 {
@@ -16,9 +17,22 @@ class TripService
     {
     }
 
+    public function getTripByID(int $id): TripListResponse
+    {
+        $trip = $this->tripRepository->findOneBy(['id' => $id]);
+        $tripObj = ([(new TripListItem())->setName($trip->getName())
+            ->setPrice($trip->getPrice())
+            ->setDescription($trip->getDescription())
+            ->setDuration($trip->getDuration())
+            ->setDateStart($trip->getDateStart()->format('Y-m-d H:i:s'))
+            ->setDateEnd($trip->getDateEnd()->format('Y-m-d H:i:s'))]);
+        return new TripListResponse($tripObj);
+
+    }
+
     public function getAllTrips(): TripListResponse
     {
-        $trips = $this->tripRepository->findAll();
+        $trips = $this->tripRepository->findBy([], ['price' => Criteria::ASC]);
         $items = array_map(
             fn(Trip $trip) => (new TripListItem())
                 ->setName($trip->getName())
@@ -45,5 +59,10 @@ class TripService
         $this->tripRepository->add($trip, true);
     }
 
+    public function delete(int $id): void
+    {
+        $trip = $this->tripRepository->findOneBy(['id' => $id]);
+        $this->tripRepository->remove($trip, true);
+    }
 
 }

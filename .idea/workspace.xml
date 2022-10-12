@@ -2,56 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf30266-8d56-49fe-bfb7-2f09a852caea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/monkey-travel.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/console" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/cache.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/doctrine_migrations.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/routing.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/preload.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes/framework.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20220926110029.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20220926114117.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20220926123821.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20220926140335.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20220926140509.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20220926140756.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20220926142815.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20220926195443.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TripController.php" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/TripControllerTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/responses/TripControllerTest_testGetTrips.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/TripServiceTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8bedb216-0bfc-482f-b602-89ef80607fb7.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/monkey-travel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/monkey-travel.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/doctrine.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TripController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TripController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTO/TripDTO.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Trip.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kernel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/TripListItem.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/TripListResponse.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/TripRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/Serializer/DTOSerializer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/TripService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Trip.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Trip.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/TripListItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/TripListItem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/TripService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/TripService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,6 +102,50 @@
       <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
       <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
       <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/nelmio/api-doc-bundle" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
     </include_path>
   </component>
   <component name="ProjectId" id="2EDKT0lQuhsUiOCD958e87Ge6l9" />
@@ -148,13 +160,25 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
+    <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yaml.database: Compose Deployment">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sofia\Desktop\php-composer\monkey-travel\src\Controller\responses" />
+      <recent name="C:\Users\Sofia\Desktop\php-composer\monkey-travel\src\Service" />
+      <recent name="C:\Users\Sofia\Desktop\php-composer\monkey-travel\src\Controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHPUnit.TripServiceTest">
+    <configuration name="TripServiceTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner class="App\Service\TripServiceTest" file="$PROJECT_DIR$/src/Service/TripServiceTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
     <configuration name="docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -178,8 +202,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yaml.database: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.database: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -205,7 +229,9 @@
       <workItem from="1664044646523" duration="1321000" />
       <workItem from="1664099518049" duration="8735000" />
       <workItem from="1664190821250" duration="37206000" />
-      <workItem from="1664709780036" duration="7007000" />
+      <workItem from="1664709780036" duration="24582000" />
+      <workItem from="1665424516244" duration="76000" />
+      <workItem from="1665426585526" duration="26561000" />
     </task>
     <servers />
   </component>

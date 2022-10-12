@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\TripRepository;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
+use App\Model\TripListResponse;
 
 
 class TripController extends AbstractController
@@ -19,13 +21,21 @@ class TripController extends AbstractController
     {
     }
 
+    /**
+     *
+     * @OA\Response (
+     *     response=200,
+     *     description = "Returns one trip with a certain id",
+     *     @Model(type=TripListResponse::class)
+     * )
+     */
     #[Route(
-        '/trip/{id}',
+        '/api/v1/trip/{id}',
         methods: 'GET'
     )]
-    public function getTrip(int $id, TripRepository $repository): Response
+    public function getTrip(int $id, TripService $service): Response
     {
-        $trip = $repository->findOneBy(['id' => $id]);
+        $trip = $service->getTripByID($id);
         return new Response(
             $this->serializer->serialize($trip, 'json'),
             200,
@@ -33,8 +43,15 @@ class TripController extends AbstractController
         );
     }
 
+    /**
+     * @OA\Response (
+     *     response = 200,
+     *     description = "Returns all trips ordered by price",
+     *     @Model (type = TripListResponse::class)
+     * )
+     */
     #[Route(
-        '/trips',
+        '/api/v1/trips',
         methods: 'GET'
     )]
     public function getTrips(TripService $service): Response
@@ -47,8 +64,15 @@ class TripController extends AbstractController
         );
     }
 
+    /**
+     * @OA\Response(
+     *     response=200,
+     *     description="Saves a new trip to database",
+     *
+     * )
+     */
     #[Route(
-        '/save-trip',
+        '/api/v1/save-trip',
         methods: 'POST'
     )]
     public function saveNewTrip(Request $request, TripService $service): Response
@@ -64,14 +88,20 @@ class TripController extends AbstractController
         );
     }
 
+    /**
+     * @OA\Response (
+     *     response = 200,
+     *     description = "Deletes a trip from database",
+     *
+     * )
+     */
     #[Route(
-        '/delete/{id}',
+        '/api/v1/delete/{id}',
         methods: 'POST'
     )]
-    public function delete(int $id, TripRepository $repository): Response
+    public function delete(int $id, TripService $service): Response
     {
-        $trip = $repository->findOneBy(['id' => $id]);
-        $repository->remove($trip, true);
+        $service->delete($id);
         return new Response(
             'success',
             200,
