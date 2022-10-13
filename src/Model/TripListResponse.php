@@ -24,6 +24,4 @@ class TripListResponse
     {
         return $this->items;
     }
-
-
 }

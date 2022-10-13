@@ -20,7 +20,7 @@ final class Version20220926140756 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE trip ADD date_start DATETIME NOT NULL DEFAULT "1970-01-02", ADD date_end DATETIME NOT NULL DEFAULT "1970-01-02"');
+        $this->addSql('ALTER TABLE trip ADD date_start DATETIME NOT NULL, ADD date_end DATETIME NOT NULL');
     }
 
     public function down(Schema $schema): void

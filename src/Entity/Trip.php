@@ -36,6 +36,7 @@ class Trip
     public function setId(int $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -44,7 +45,7 @@ class Trip
         return $this->id;
     }
 
-    public function getPrice():  int
+    public function getPrice(): int
     {
         return $this->price;
     }
@@ -85,16 +86,15 @@ class Trip
         return $this->duration;
     }
 
-
     public function getDateStart(): ?DateTimeInterface
     {
         return $this->date_start;
     }
 
-
     public function setDateStart(DateTimeInterface $date_start): self
     {
         $this->date_start = $date_start;
+
         return $this;
     }
 
@@ -106,9 +106,9 @@ class Trip
     public function setDateEnd(DateTimeInterface $date_end): self
     {
         $this->date_end = $date_end;
+
         return $this;
     }
-
 
     public function setDuration(int $duration): self
     {
@@ -116,6 +116,4 @@ class Trip
 
         return $this;
     }
-
-
 }

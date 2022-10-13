@@ -25,7 +25,6 @@ final class Version20220926123821 extends AbstractMigration
                         (3, 700, "Very cool trip to Egypt", "Egypt-10", "2022-01-10 00:00:00", "2022-01-20 00:00:00", 10), 
                         (4, 2700, "Very cool trip to Maldives", "Maldives-15", "2022-02-01 00:00:00", "2022-02-16 00:00:00", 15); 
                       ');
-
     }
 
     public function down(Schema $schema): void

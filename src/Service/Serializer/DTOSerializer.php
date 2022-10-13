@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service\Serializer;
-
 
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;

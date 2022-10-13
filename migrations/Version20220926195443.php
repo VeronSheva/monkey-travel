@@ -21,12 +21,17 @@ final class Version20220926195443 extends AbstractMigration
     {
         $this->addSql(
             'INSERT INTO trip VALUES
-                 (5, 600, "Very cool trip to Greece", "Greece-10", "2022-04-12 00:00:00", "2022-04-22 00:00:00", 10)'
+                 (1, 500, "Very cool trip to Egypt", "Egypt-7", "2022-01-10 00:00:00", "2022-01-17 00:00:00", 7), 
+                 (2, 400, "Very cool trip to Turkey", "Turkey", "2022-01-11 00:00:00", "2022-01-18 00:00:00", 7), 
+                 (3, 700, "Very cool trip to Egypt", "Egypt-10", "2022-01-10 00:00:00", "2022-01-20 00:00:00", 10), 
+                 (4, 2700, "Very cool trip to Maldives", "Maldives-15", "2022-02-01 00:00:00", "2022-02-16 00:00:00", 15),
+                 (5, 600, "Very cool trip to Greece", "Greece-10", "2022-04-12 00:00:00", "2022-04-22 00:00:00", 10);
+                 '
         );
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('DELETE FROM trip WHERE id=5');
+        $this->addSql('DELETE FROM trip WHERE id IN(1, 2, 3, 4, 5)');
     }
 }
