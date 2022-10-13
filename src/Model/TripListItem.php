@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Model;
-
 
 class TripListItem
 {
@@ -26,6 +24,7 @@ class TripListItem
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -37,6 +36,7 @@ class TripListItem
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -48,6 +48,7 @@ class TripListItem
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
         return $this;
     }
 
@@ -59,6 +60,7 @@ class TripListItem
     public function setDuration(int $duration): self
     {
         $this->duration = $duration;
+
         return $this;
     }
 
@@ -67,10 +69,10 @@ class TripListItem
         return $this->date_start;
     }
 
-
     public function setDateStart(string $date_start): self
     {
         $this->date_start = $date_start;
+
         return $this;
     }
 
@@ -82,8 +84,7 @@ class TripListItem
     public function setDateEnd(string $date_end): self
     {
         $this->date_end = $date_end;
+
         return $this;
     }
-
-
 }
