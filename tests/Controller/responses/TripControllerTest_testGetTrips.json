@@ -33,22 +33,6 @@
       "date_end": "2022-01-20 00:00:00"
     },
     {
-      "name": "Spain",
-      "description": "Very cool trip to Spain",
-      "price": 700,
-      "duration": 10,
-      "date_start": "2022-06-11 00:00:00",
-      "date_end": "2022-06-21 00:00:00"
-    },
-    {
-      "name": "Germany",
-      "description": "Very cool trip to Germany",
-      "price": 800,
-      "duration": 10,
-      "date_start": "2022-05-22 00:00:00",
-      "date_end": "2022-06-01 00:00:00"
-    },
-    {
       "name": "Maldives-15",
       "description": "Very cool trip to Maldives",
       "price": 2700,
