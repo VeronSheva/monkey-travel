@@ -24,12 +24,12 @@ class TripService
             throw new TripNotFoundException();
         }
 
-        $tripObj = [(new TripListItem())->setName($trip->getName())
-            ->setPrice($trip->getPrice())
-            ->setDescription($trip->getDescription())
-            ->setDuration($trip->getDuration())
-            ->setDateStart($trip->getDateStart()->format('Y-m-d H:i:s'))
-            ->setDateEnd($trip->getDateEnd()->format('Y-m-d H:i:s')), ];
+        $tripObj = [new TripListItem($trip->getName(),
+            $trip->getDescription(),
+            $trip->getDuration(),
+            $trip->getPrice(),
+            $trip->getDateStart()->format('Y-m-d H:i:s'),
+            $trip->getDateEnd()->format('Y-m-d H:i:s')), ];
 
         return new TripListResponse($tripObj);
     }
@@ -38,13 +38,12 @@ class TripService
     {
         $trips = $this->tripRepository->findBy([], ['price' => Criteria::ASC]);
         $items = array_map(
-            fn (Trip $trip) => (new TripListItem())
-                ->setName($trip->getName())
-                ->setDescription($trip->getDescription())
-                ->setDuration($trip->getDuration())
-                ->setPrice($trip->getPrice())
-                ->setDateStart($trip->getDateStart()->format('Y-m-d H:i:s'))
-                ->setDateEnd($trip->getDateEnd()->format('Y-m-d H:i:s')), $trips);
+            fn (Trip $trip) => new TripListItem($trip->getName(),
+                $trip->getDescription(),
+                $trip->getPrice(),
+                $trip->getDuration(),
+                $trip->getDateStart()->format('Y-m-d H:i:s'),
+                $trip->getDateEnd()->format('Y-m-d H:i:s')), $trips);
 
         return new TripListResponse($items);
     }

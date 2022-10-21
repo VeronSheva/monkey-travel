@@ -16,6 +16,25 @@ class TripListItem
 
     private string $date_end;
 
+    /**
+     * TripListItem constructor.
+     * @param string $name
+     * @param string $description
+     * @param int $price
+     * @param int $duration
+     * @param string $date_start
+     * @param string $date_end
+     */
+    public function __construct(string $name, string $description, int $price, int $duration, string $date_start, string $date_end)
+    {
+        $this->name = $name;
+        $this->description = $description;
+        $this->price = $price;
+        $this->duration = $duration;
+        $this->date_start = $date_start;
+        $this->date_end = $date_end;
+    }
+
     public function getName(): string
     {
         return $this->name;
