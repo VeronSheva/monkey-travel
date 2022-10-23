@@ -24,7 +24,8 @@ class TripService
             throw new TripNotFoundException();
         }
 
-        $tripObj = [new TripListItem($trip->getName(),
+        $tripObj = [new TripListItem($trip->getId(),
+            $trip->getName(),
             $trip->getDescription(),
             $trip->getDuration(),
             $trip->getPrice(),
@@ -38,7 +39,8 @@ class TripService
     {
         $trips = $this->tripRepository->findBy([], ['price' => Criteria::ASC]);
         $items = array_map(
-            fn (Trip $trip) => new TripListItem($trip->getName(),
+            fn (Trip $trip) => new TripListItem($trip->getId(),
+                $trip->getName(),
                 $trip->getDescription(),
                 $trip->getPrice(),
                 $trip->getDuration(),
