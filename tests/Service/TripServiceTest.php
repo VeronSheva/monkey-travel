@@ -28,7 +28,7 @@ class TripServiceTest extends AbstractTestCase
 
         $service = new TripService($repository);
 
-        $expected = new TripListResponse([new TripListItem('test', 'test',
+        $expected = new TripListResponse([new TripListItem(7, 'test', 'test',
             200, 10, '2000-02-02 00:00:00', '2000-02-12 00:00:00'),
              ]);
 
