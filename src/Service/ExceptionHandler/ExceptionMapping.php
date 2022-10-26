@@ -4,6 +4,7 @@ namespace App\Service\ExceptionHandler;
 
 class ExceptionMapping
 {
+
     public function __construct(private int $code, private bool $hidden, private bool $loggable)
     {
     }
