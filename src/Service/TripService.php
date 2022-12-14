@@ -8,11 +8,13 @@ use App\Model\TripListItem;
 use App\Model\TripListResponse;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class TripService
 {
     public function __construct(
         private TripRepository $tripRepository,
+        private ValidatorInterface $validator
     ) {
     }
 
@@ -63,6 +65,18 @@ class TripService
             ->setDuration($tripObj->getDuration());
 
         $this->tripRepository->add($trip, true);
+    }
+
+    public function validateTrip(TripListItem $trip): ?string
+    {
+        $errors = $this->validator->validate($trip);
+        $errorString = null;
+        if (count($errors) > 0) {
+            $errorString = (string) $errors;
+        } else {
+            $this->saveTrip($trip);
+        }
+        return $errorString;
     }
 
     public function deleteTrip(int $id): void

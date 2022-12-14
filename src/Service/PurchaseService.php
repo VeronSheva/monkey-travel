@@ -10,13 +10,16 @@ use App\Model\PurchaseListResponse;
 use App\Model\PurchaseOutListItem;
 use App\Repository\PurchaseRepository;
 use App\Repository\TripRepository;
-use DateTimeZone;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PurchaseService
 {
-    public function __construct(private PurchaseRepository $repository, private TripRepository $tripRepository)
-    {
+    public function __construct(
+        private PurchaseRepository $repository,
+        private TripRepository $tripRepository,
+        private ValidatorInterface $validator
+    ){
     }
 
     public function getPurchaseByID(int $id): PurchaseListResponse
@@ -74,13 +77,26 @@ class PurchaseService
 
         $purchase = (new Purchase())
             ->setTrip($item->getTrip())
+            ->setCountryCode($item->getCountryCode())
             ->setPhoneNumber($item->getPhoneNumber())
             ->setEmail($item->getEmail())
             ->setName($item->getName())
-            ->setOrderTime(date_create_immutable('now', new DateTimeZone('Europe/Kyiv')))
+            ->setOrderTime(date_create_immutable('now', new \DateTimeZone('Europe/Kyiv')))
             ->setPeople($item->getPeople())
             ->setSum($price * $item->getPeople());
         $this->repository->save($purchase, true);
+    }
+
+    public function validatePurchase(PurchaseInListItem $purchase): ?string
+    {
+        $errors = $this->validator->validate($purchase);
+        $errorString = null;
+        if (count($errors) > 0) {
+            $errorString = (string) $errors;
+        } else {
+            $this->savePurchase($purchase);
+        }
+        return $errorString;
     }
 
     public function deletePurchase(int $id): void

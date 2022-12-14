@@ -2,20 +2,46 @@
 
 namespace App\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class TripListItem
 {
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+    )]
     private string $name;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 300,
+    )]
     private string $description;
 
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private int $price;
 
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private int $duration;
 
+    /**
+     * @var string A "Y-m-d H:i:s" formatted value
+     */
+    #[Assert\DateTime]
+    #[Assert\NotBlank]
     private string $date_start;
 
+    /**
+     * @var string A "Y-m-d H:i:s" formatted value
+     */
+    #[Assert\DateTime]
+    #[Assert\NotBlank]
     private string $date_end;
 
     public function getId(): int

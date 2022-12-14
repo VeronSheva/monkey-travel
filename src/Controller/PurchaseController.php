@@ -56,10 +56,9 @@ class PurchaseController extends AbstractController
             $request->getContent(),
             PurchaseInListItem::class, 'json'
         );
-        $service->savePurchase($item);
 
         return new Response(
-            'success',
+            $service->validatePurchase($item),
             200,
             ['Content-Type' => 'application/json']);
     }

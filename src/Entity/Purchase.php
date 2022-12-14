@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PurchaseRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PurchaseRepository::class)]
@@ -17,6 +16,9 @@ class Purchase
     #[ORM\Column]
     private int $trip;
 
+    #[ORM\Column(length: 10)]
+    private string $country_code;
+
     #[ORM\Column(length: 50)]
     private string $phone_number;
 
@@ -27,7 +29,7 @@ class Purchase
     private string $name;
 
     #[ORM\Column]
-    private DateTimeImmutable $order_time;
+    private \DateTimeImmutable $order_time;
 
     #[ORM\Column]
     private int $people;
@@ -48,6 +50,18 @@ class Purchase
     public function setTrip(int $trip): self
     {
         $this->trip = $trip;
+
+        return $this;
+    }
+
+    public function getCountryCode(): ?string
+    {
+        return $this->country_code;
+    }
+
+    public function setCountryCode(string $country_code): self
+    {
+        $this->country_code = $country_code;
 
         return $this;
     }
@@ -88,12 +102,12 @@ class Purchase
         return $this;
     }
 
-    public function getOrderTime(): DateTimeImmutable
+    public function getOrderTime(): \DateTimeImmutable
     {
         return $this->order_time;
     }
 
-    public function setOrderTime(DateTimeImmutable $order_time): self
+    public function setOrderTime(\DateTimeImmutable $order_time): self
     {
         $this->order_time = $order_time;
 
@@ -112,7 +126,7 @@ class Purchase
         return $this;
     }
 
-    public function getSum():int
+    public function getSum(): int
     {
         return $this->sum;
     }

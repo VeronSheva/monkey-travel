@@ -2,35 +2,37 @@
 
 namespace App\Model;
 
+use App\Const\CountryCode;
+use Symfony\Component\Validator\Constraints as Assert;
+
 class PurchaseInListItem
 {
-    private ?int $id = null;
-
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private int $trip;
 
+    #[Assert\NotBlank]
+    #[Assert\Choice(callback: [CountryCode::class, 'values'])]
+    private string $country_code;
+
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '/^[0-9]{10}$/'
+    )]
     private string $phone_number;
 
+    #[Assert\Email]
     private ?string $email;
 
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+    )]
     private string $name;
 
-    private string $order_time;
-
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private int $people;
-
-    private int $sum;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function setId(?int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     public function getTrip(): string
     {
@@ -40,6 +42,18 @@ class PurchaseInListItem
     public function setTrip(string $trip): self
     {
         $this->trip = $trip;
+
+        return $this;
+    }
+
+    public function getCountryCode(): string
+    {
+        return $this->country_code;
+    }
+
+    public function setCountryCode(string $country_code): self
+    {
+        $this->country_code = $country_code;
 
         return $this;
     }
@@ -80,18 +94,6 @@ class PurchaseInListItem
         return $this;
     }
 
-    public function getOrderTime(): string
-    {
-        return $this->order_time;
-    }
-
-    public function setOrderTime(string $order_time): self
-    {
-        $this->order_time = $order_time;
-
-        return $this;
-    }
-
     public function getPeople(): int
     {
         return $this->people;
@@ -100,18 +102,6 @@ class PurchaseInListItem
     public function setPeople(int $people): self
     {
         $this->people = $people;
-
-        return $this;
-    }
-
-    public function getSum(): int
-    {
-        return $this->sum;
-    }
-
-    public function setSum(int $sum): self
-    {
-        $this->sum = $sum;
 
         return $this;
     }

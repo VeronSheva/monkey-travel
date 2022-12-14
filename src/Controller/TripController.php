@@ -86,10 +86,8 @@ class TripController extends AbstractController
         $item = $this->serializer->deserialize(
             $request->getContent(), TripListItem::class, 'json'
         );
-        $service->saveTrip($item);
-
         return new Response(
-            'success',
+            $service->validateTrip($item),
             200,
             ['Content-Type' => 'application/json']
         );

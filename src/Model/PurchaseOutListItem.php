@@ -4,7 +4,7 @@ namespace App\Model;
 
 class PurchaseOutListItem
 {
-    private ?int $id = null;
+    private int $id;
 
     private string $trip;
 
