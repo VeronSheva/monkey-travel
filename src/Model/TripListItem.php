@@ -4,7 +4,7 @@ namespace App\Model;
 
 class TripListItem
 {
-    private int $id;
+    private ?int $id = null;
 
     private string $name;
 
@@ -18,23 +18,16 @@ class TripListItem
 
     private string $date_end;
 
-    /**
-     * TripListItem constructor.
-     */
-    public function __construct(int $id, string $name, string $description, int $price, int $duration, string $date_start, string $date_end)
-    {
-        $this->name = $name;
-        $this->id = $id;
-        $this->description = $description;
-        $this->price = $price;
-        $this->duration = $duration;
-        $this->date_start = $date_start;
-        $this->date_end = $date_end;
-    }
-
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): string

@@ -24,33 +24,35 @@ class TripService
             throw new TripNotFoundException();
         }
 
-        $tripObj = [new TripListItem($trip->getId(),
-            $trip->getName(),
-            $trip->getDescription(),
-            $trip->getDuration(),
-            $trip->getPrice(),
-            $trip->getDateStart()->format('Y-m-d H:i:s'),
-            $trip->getDateEnd()->format('Y-m-d H:i:s')), ];
+        $tripObj = [(new TripListItem())
+            ->setId($trip->getId())
+            ->setName($trip->getName())
+            ->setDescription($trip->getDescription())
+            ->setDuration($trip->getDuration())
+            ->setPrice($trip->getPrice())
+            ->setDateStart($trip->getDateStart()->format('Y-m-d H:i:s'))
+            ->setDateEnd($trip->getDateEnd()->format('Y-m-d H:i:s')), ];
 
         return new TripListResponse($tripObj);
     }
 
-    public function getAllTrips(): TripListResponse
+    public function getTrips(): TripListResponse
     {
         $trips = $this->tripRepository->findBy([], ['price' => Criteria::ASC]);
         $items = array_map(
-            fn (Trip $trip) => new TripListItem($trip->getId(),
-                $trip->getName(),
-                $trip->getDescription(),
-                $trip->getPrice(),
-                $trip->getDuration(),
-                $trip->getDateStart()->format('Y-m-d H:i:s'),
-                $trip->getDateEnd()->format('Y-m-d H:i:s')), $trips);
+            fn (Trip $trip) => (new TripListItem())
+                ->setId($trip->getId())
+                ->setName($trip->getName())
+                ->setDescription($trip->getDescription())
+                ->setDuration($trip->getDuration())
+                ->setPrice($trip->getPrice())
+                ->setDateStart($trip->getDateStart()->format('Y-m-d H:i:s'))
+                ->setDateEnd($trip->getDateEnd()->format('Y-m-d H:i:s')), $trips);
 
         return new TripListResponse($items);
     }
 
-    public function save(TripListItem $tripObj): void
+    public function saveTrip(TripListItem $tripObj): void
     {
         $trip = new Trip();
         $trip->setPrice($tripObj->getPrice())
@@ -63,7 +65,7 @@ class TripService
         $this->tripRepository->add($trip, true);
     }
 
-    public function delete(int $id): void
+    public function deleteTrip(int $id): void
     {
         $trip = $this->tripRepository->findOneBy(['id' => $id]);
 

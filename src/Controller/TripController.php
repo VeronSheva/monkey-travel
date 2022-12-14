@@ -24,7 +24,7 @@ class TripController extends AbstractController
      * @OA\Response (
      *     response=200,
      *     description = "Returns one trip with a certain id",
-     *     @Model(type=TripListResponse::class)
+     *     @Model(type = TripListResponse::class)
      * )
      * @OA\Response (
      *     response = 404,
@@ -33,10 +33,10 @@ class TripController extends AbstractController
      * )
      */
     #[Route(
-        '/api/v1/trip/{id}',
+        '/api/v1/get-trip/{id}',
         methods: 'GET'
     )]
-    public function getTrip(int $id, TripService $service): Response
+    public function getTripById(int $id, TripService $service): Response
     {
         $trip = $service->getTripByID($id);
 
@@ -56,12 +56,12 @@ class TripController extends AbstractController
      * )
      */
     #[Route(
-        '/api/v1/trips',
+        '/api/v1/get-trips',
         methods: 'GET'
     )]
     public function getTrips(TripService $service): Response
     {
-        $list = $service->getAllTrips();
+        $list = $service->getTrips();
 
         return new Response(
             $this->serializer->serialize($list, 'json'),
@@ -81,12 +81,12 @@ class TripController extends AbstractController
         '/api/v1/save-trip',
         methods: 'POST'
     )]
-    public function saveNewTrip(Request $request, TripService $service): Response
+    public function saveTrip(Request $request, TripService $service): Response
     {
-        $tripOb = $this->serializer->deserialize(
+        $item = $this->serializer->deserialize(
             $request->getContent(), TripListItem::class, 'json'
         );
-        $service->save($tripOb);
+        $service->saveTrip($item);
 
         return new Response(
             'success',
@@ -108,12 +108,12 @@ class TripController extends AbstractController
      * )
      */
     #[Route(
-        '/api/v1/delete/{id}',
+        '/api/v1/delete-trip/{id}',
         methods: 'POST'
     )]
-    public function delete(int $id, TripService $service): Response
+    public function deleteTrip(int $id, TripService $service): Response
     {
-        $service->delete($id);
+        $service->deleteTrip($id);
 
         return new Response(
             'success',
