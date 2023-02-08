@@ -31,18 +31,36 @@ class TripListItem
     private int $duration;
 
     /**
-     * @var string A "Y-m-d H:i:s" formatted value
+     * @var string A "d-m-Y" formatted value
      */
-    #[Assert\DateTime]
+    #[Assert\Date]
     #[Assert\NotBlank]
     private string $date_start;
 
     /**
-     * @var string A "Y-m-d H:i:s" formatted value
+     * @var string A "d-m-Y" formatted value
      */
-    #[Assert\DateTime]
+    #[Assert\Date]
     #[Assert\NotBlank]
     private string $date_end;
+
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+    )]
+    private string $country;
+
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 300,
+    )]
+    private string $img;
+
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    private int $free_places;
 
     public function getId(): int
     {
@@ -124,6 +142,42 @@ class TripListItem
     public function setDateEnd(string $date_end): self
     {
         $this->date_end = $date_end;
+
+        return $this;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getImg(): string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): self
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    public function getFreePlaces(): int
+    {
+        return $this->free_places;
+    }
+
+    public function setFreePlaces(int $free_places): self
+    {
+        $this->free_places = $free_places;
 
         return $this;
     }

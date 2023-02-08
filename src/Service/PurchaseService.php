@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Purchase;
+use App\Exception\NotEnoughPlacesException;
 use App\Exception\PurchaseNotFoundException;
 use App\Exception\TripNotFoundException;
 use App\Model\PurchaseInListItem;
@@ -11,15 +12,13 @@ use App\Model\PurchaseOutListItem;
 use App\Repository\PurchaseRepository;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PurchaseService
 {
     public function __construct(
         private PurchaseRepository $repository,
         private TripRepository $tripRepository,
-        private ValidatorInterface $validator
-    ){
+    ) {
     }
 
     public function getPurchaseByID(int $id): PurchaseListResponse
@@ -73,6 +72,11 @@ class PurchaseService
 
         if (null === $trip) {
             throw new TripNotFoundException();
+        } else {
+            $free_places = $trip->getFreePlaces();
+            if ($free_places < $item->getPeople()) {
+                throw new NotEnoughPlacesException();
+            }
         }
 
         $purchase = (new Purchase())
@@ -85,18 +89,8 @@ class PurchaseService
             ->setPeople($item->getPeople())
             ->setSum($price * $item->getPeople());
         $this->repository->save($purchase, true);
-    }
 
-    public function validatePurchase(PurchaseInListItem $purchase): ?string
-    {
-        $errors = $this->validator->validate($purchase);
-        $errorString = null;
-        if (count($errors) > 0) {
-            $errorString = (string) $errors;
-        } else {
-            $this->savePurchase($purchase);
-        }
-        return $errorString;
+        $this->tripRepository->updateFreePlaces($trip, $purchase);
     }
 
     public function deletePurchase(int $id): void

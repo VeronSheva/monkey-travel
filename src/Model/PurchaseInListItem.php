@@ -2,7 +2,8 @@
 
 namespace App\Model;
 
-use App\Const\CountryCode;
+use App\Const\CountryPhoneCode;
+use App\Repository\TripRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class PurchaseInListItem
@@ -12,12 +13,12 @@ class PurchaseInListItem
     private int $trip;
 
     #[Assert\NotBlank]
-    #[Assert\Choice(callback: [CountryCode::class, 'values'])]
+    #[Assert\Choice(callback: [CountryPhoneCode::class, 'names'])]
     private string $country_code;
 
     #[Assert\NotBlank]
     #[Assert\Regex(
-        pattern: '/^[0-9]{10}$/'
+        pattern: '/^[0-9]{9}$/'
     )]
     private string $phone_number;
 

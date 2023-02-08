@@ -10,6 +10,7 @@ use App\Repository\TripRepository;
 use App\Service\TripService;
 use App\Tests\AbstractTestCase;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class TripServiceTest extends AbstractTestCase
 {
@@ -21,9 +22,11 @@ class TripServiceTest extends AbstractTestCase
             ->with(['id' => 7])
             ->willReturn(null);
 
+        $validator = $this->createMock(ValidatorInterface::class);
+
         $this->expectException(TripNotFoundException::class);
 
-        (new TripService($repository))->getTripByID(7);
+        (new TripService($repository, $validator))->getTripByID(7);
     }
 
     public function testGetTrips(): void
@@ -36,7 +39,9 @@ class TripServiceTest extends AbstractTestCase
             ->with([], ['price' => Criteria::ASC])
             ->willReturn([$trip]);
 
-        $service = new TripService($repository);
+        $validator = $this->createMock(ValidatorInterface::class);
+
+        $service = new TripService($repository, $validator);
 
         $expected = $this->createTripListResponse();
 

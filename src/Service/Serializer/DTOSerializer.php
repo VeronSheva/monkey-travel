@@ -2,6 +2,7 @@
 
 namespace App\Service\Serializer;
 
+use Masterminds\HTML5\Parser\UTF8Utils;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;

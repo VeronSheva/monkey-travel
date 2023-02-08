@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Const\Countries;
+use App\Exception\ValidationFailedException;
 use App\Model\ErrorResponse;
+use App\Model\TripFilters;
 use App\Model\TripListItem;
 use App\Model\TripListResponse;
 use App\Service\Serializer\DTOSerializer;
@@ -13,11 +16,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class TripController extends AbstractController
 {
-    public function __construct(private DTOSerializer $serializer)
-    {
+    public function __construct(
+        private DTOSerializer $serializer,
+        private ValidatorInterface $validator,
+    ) {
     }
 
     /**
@@ -56,17 +62,43 @@ class TripController extends AbstractController
      * )
      */
     #[Route(
-        '/api/v1/get-trips',
-        methods: 'GET'
+        '/api/v1/get-trips/{limit}/{page}', defaults: ['limit' => 5, 'page' => 1],
+        methods: 'POST'
     )]
-    public function getTrips(TripService $service): Response
+    public function getTrips(TripService $service, Request $request, int $limit, int $page): Response
     {
-        $list = $service->getTrips();
+        $filters = $this->serializer->deserialize(
+            $request->getContent(), TripFilters::class, 'json'
+        );
+
+        $errors = $this->validator->validate($filters);
+
+        if (count($errors) > 0) {
+            throw new ValidationFailedException(json_encode($errors));
+        } else {
+            $trips = $service->getTrips($filters, $limit, $page);
+        }
 
         return new Response(
-            $this->serializer->serialize($list, 'json'),
+            $this->serializer->serialize($trips, 'json'),
             200,
             ['Content-Type' => 'application/json']
+        );
+    }
+
+    #[Route(
+        '/api/v1/get-countries',
+        methods: 'GET'
+    )]
+    public function getCountries(): Response
+    {
+        $countries = Countries::enumToArray();
+
+        return new Response(
+            $this->serializer->serialize($countries, 'json'),
+            200,
+            ['Content-Type' => 'application/json',
+            ]
         );
     }
 
@@ -86,8 +118,16 @@ class TripController extends AbstractController
         $item = $this->serializer->deserialize(
             $request->getContent(), TripListItem::class, 'json'
         );
-        return new Response(
-            $service->validateTrip($item),
+
+        $errors = $this->validator->validate($item);
+
+        if (count($errors) > 0) {
+            throw new ValidationFailedException(json_encode($errors));
+        } else {
+            $service->saveTrip($item);
+        }
+
+        return new Response('success',
             200,
             ['Content-Type' => 'application/json']
         );

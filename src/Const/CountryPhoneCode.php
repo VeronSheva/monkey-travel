@@ -2,11 +2,11 @@
 
 namespace App\Const;
 
-enum CountryCode: string
+enum CountryPhoneCode: string
 {
     case US = '+1';
     case TR = '+9';
-    case UA = '+38';
+    case UA = '+380';
     case PL = '+48';
     case MD = '+373';
     case IT = '+39';
@@ -33,5 +33,26 @@ enum CountryCode: string
         }
 
         return $values;
+    }
+
+    public static function names(): array
+    {
+        $names = [];
+        foreach (self::cases() as $case) {
+            $names[] = $case->name;
+        }
+
+        return $names;
+    }
+
+    public static function enumToArray(): array
+    {
+        $casesArray = [];
+        foreach (self::cases() as $case) {
+            $casesArray[] = ['code' => $case->value,
+                'abr' => $case->name, ];
+        }
+
+        return $casesArray;
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\TripRepository;
-use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,16 +23,25 @@ class Trip
     #[ORM\Column(length: 120)]
     private string $name;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private DateTimeInterface $date_start;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private \DateTimeInterface $date_start;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private DateTimeInterface $date_end;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private \DateTimeInterface $date_end;
 
     #[ORM\Column]
     private int $duration;
 
-    public function getId(): ?int
+    #[ORM\Column]
+    private string $country;
+
+    #[ORM\Column(length: 255)]
+    private string $img;
+
+    #[ORM\Column]
+    private int $free_places;
+
+    public function getId(): int
     {
         return $this->id;
     }
@@ -79,24 +87,24 @@ class Trip
         return $this->duration;
     }
 
-    public function getDateStart(): ?DateTimeInterface
+    public function getDateStart(): ?\DateTimeInterface
     {
         return $this->date_start;
     }
 
-    public function setDateStart(DateTimeInterface $date_start): self
+    public function setDateStart(\DateTimeInterface $date_start): self
     {
         $this->date_start = $date_start;
 
         return $this;
     }
 
-    public function getDateEnd(): ?DateTimeInterface
+    public function getDateEnd(): ?\DateTimeInterface
     {
         return $this->date_end;
     }
 
-    public function setDateEnd(DateTimeInterface $date_end): self
+    public function setDateEnd(\DateTimeInterface $date_end): self
     {
         $this->date_end = $date_end;
 
@@ -106,6 +114,42 @@ class Trip
     public function setDuration(int $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getImg(): string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): self
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    public function getFreePlaces(): int
+    {
+        return $this->free_places;
+    }
+
+    public function setFreePlaces(int $free_places): self
+    {
+        $this->free_places = $free_places;
 
         return $this;
     }

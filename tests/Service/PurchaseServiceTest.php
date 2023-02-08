@@ -12,6 +12,7 @@ use App\Repository\TripRepository;
 use App\Service\PurchaseService;
 use App\Tests\AbstractTestCase;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PurchaseServiceTest extends AbstractTestCase
 {
@@ -25,9 +26,11 @@ class PurchaseServiceTest extends AbstractTestCase
 
         $tripRepository = $this->createMock(TripRepository::class);
 
+        $validator = $this->createMock(ValidatorInterface::class);
+
         $this->expectException(PurchaseNotFoundException::class);
 
-        (new PurchaseService($repository, $tripRepository))->getPurchaseByID(50);
+        (new PurchaseService($repository, $tripRepository, $validator))->getPurchaseByID(50);
     }
 
     public function testGetPurchases(): void
@@ -48,7 +51,9 @@ class PurchaseServiceTest extends AbstractTestCase
             ->with(['id' => $purchase->getTrip()])
             ->willReturn($trip);
 
-        $service = new PurchaseService($repository, $tripRepository);
+        $validator = $this->createMock(ValidatorInterface::class);
+
+        $service = new PurchaseService($repository, $tripRepository, $validator);
 
         $expected = $this->createPurchaseListResponse($trip);
 

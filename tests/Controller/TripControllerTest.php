@@ -17,7 +17,7 @@ class TripControllerTest extends AbstractControllerTest
         ->setDateEnd(date_create_immutable('2000-10-20 00:00:00')));
         $this->em->flush();
 
-        $this->client->request('GET', '/api/v1/trips');
+        $this->client->request('GET', '/api/v1/get-trips');
         $responseContent = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertResponseIsSuccessful();
