@@ -2,22 +2,20 @@
 
 namespace App\Controller;
 
+use App\Attribute\RequestBody;
 use App\Const\CountryPhoneCode;
-use App\Exception\ValidationFailedException;
 use App\Model\PurchaseInListItem;
 use App\Service\PurchaseService;
 use App\Service\Serializer\DTOSerializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PurchaseController extends AbstractController
 {
     public function __construct(
         private DTOSerializer $serializer,
-        private ValidatorInterface $validator
+        private PurchaseService $service
     ) {
     }
 
@@ -25,9 +23,9 @@ class PurchaseController extends AbstractController
         '/api/v1/get-purchase/{id}',
         methods: 'GET'
     )]
-    public function getPurchaseById(PurchaseService $service, int $id): Response
+    public function getPurchaseById(int $id): Response
     {
-        $purchase = $service->getPurchaseByID($id);
+        $purchase = $this->service->getPurchaseByID($id);
 
         return new Response(
             $this->serializer->serialize($purchase, 'json'),
@@ -40,9 +38,9 @@ class PurchaseController extends AbstractController
         '/api/v1/get-purchases',
         methods: 'GET'
     )]
-    public function getPurchases(PurchaseService $service): Response
+    public function getPurchases(): Response
     {
-        $purchases = $service->getPurchases();
+        $purchases = $this->service->getPurchases();
 
         return new Response(
             $this->serializer->serialize($purchases, 'json'),
@@ -55,18 +53,9 @@ class PurchaseController extends AbstractController
         'api/v1/save-purchase',
         methods: 'POST'
     )]
-    public function savePurchase(Request $request, PurchaseService $service): Response
+    public function savePurchase(#[RequestBody] PurchaseInListItem $item): Response
     {
-        $item = $this->serializer->deserialize(
-            $request->getContent(),
-            PurchaseInListItem::class, 'json'
-        );
-        $errors = $this->validator->validate($item);
-        if (count($errors) > 0) {
-            throw new ValidationFailedException(json_encode($errors));
-        } else {
-            $service->savePurchase($item);
-        }
+        $this->service->savePurchase($item);
 
         return new Response(
             'success',
@@ -94,9 +83,9 @@ class PurchaseController extends AbstractController
         '/api/v1/delete-purchase/{id}',
         methods: 'POST'
     )]
-    public function deletePurchase(int $id, PurchaseService $service): Response
+    public function deletePurchase(int $id): Response
     {
-        $service->deletePurchase($id);
+        $this->service->deletePurchase($id);
 
         return new Response(
             'success',

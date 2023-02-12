@@ -14,7 +14,7 @@ class TripFilters
     #[Assert\PositiveOrZero]
     private ?int $min_sum = null;
 
-    #[Assert\PositiveOrZero]
+    #[Assert\Positive]
     #[Assert\LessThanOrEqual(10000)]
     private ?int $max_sum = null;
 

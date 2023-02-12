@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Const\Countries;
+use App\Const\CountryPhoneCode;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class TripListItem
@@ -45,10 +47,9 @@ class TripListItem
     private string $date_end;
 
     #[Assert\NotBlank]
-    #[Assert\Length(
-        min: 2,
-        max: 50,
-    )]
+    #[Assert\Choice(
+        callback: [Countries::class, 'values'],
+        message: 'Цієї країни немає в системі. Спочатку додайте її.')]
     private string $country;
 
     #[Assert\NotBlank]

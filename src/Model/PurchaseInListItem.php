@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use App\Const\CountryPhoneCode;
-use App\Repository\TripRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class PurchaseInListItem
@@ -13,26 +12,31 @@ class PurchaseInListItem
     private int $trip;
 
     #[Assert\NotBlank]
-    #[Assert\Choice(callback: [CountryPhoneCode::class, 'names'])]
+    #[Assert\Choice(
+        callback: [CountryPhoneCode::class, 'names'],
+        message: 'Вибрано неправильний код країни')]
     private string $country_code;
 
     #[Assert\NotBlank]
     #[Assert\Regex(
-        pattern: '/^[0-9]{9}$/'
+        pattern: '/^[0-9]{9}$/',
+        message: 'Уведено неправильний номер телефону'
     )]
     private string $phone_number;
 
-    #[Assert\Email]
+    #[Assert\Email(message: 'Уведено неправильний e-mail')]
     private ?string $email;
 
     #[Assert\Length(
         min: 2,
         max: 50,
+        minMessage: 'Ім\'я має складатися мінімум з 2 символів',
+        maxMessage: 'Ім\'я має складатися максимум з 50 символів'
     )]
     private string $name;
 
     #[Assert\NotBlank]
-    #[Assert\Positive]
+    #[Assert\Positive(message: 'Уведіть правильну кількість')]
     private int $people;
 
     public function getTrip(): string

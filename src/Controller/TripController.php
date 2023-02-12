@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+use App\Attribute\RequestBody;
 use App\Const\Countries;
-use App\Exception\ValidationFailedException;
 use App\Model\ErrorResponse;
 use App\Model\TripFilters;
 use App\Model\TripListItem;
@@ -13,7 +13,6 @@ use App\Service\TripService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -22,7 +21,7 @@ class TripController extends AbstractController
 {
     public function __construct(
         private DTOSerializer $serializer,
-        private ValidatorInterface $validator,
+        private TripService $service
     ) {
     }
 
@@ -42,9 +41,9 @@ class TripController extends AbstractController
         '/api/v1/get-trip/{id}',
         methods: 'GET'
     )]
-    public function getTripById(int $id, TripService $service): Response
+    public function getTripById(int $id): Response
     {
-        $trip = $service->getTripByID($id);
+        $trip = $this->service->getTripByID($id);
 
         return new Response(
             $this->serializer->serialize($trip, 'json'),
@@ -65,19 +64,9 @@ class TripController extends AbstractController
         '/api/v1/get-trips/{limit}/{page}', defaults: ['limit' => 5, 'page' => 1],
         methods: 'POST'
     )]
-    public function getTrips(TripService $service, Request $request, int $limit, int $page): Response
+    public function getTrips(#[RequestBody] TripFilters $filters, int $limit, int $page): Response
     {
-        $filters = $this->serializer->deserialize(
-            $request->getContent(), TripFilters::class, 'json'
-        );
-
-        $errors = $this->validator->validate($filters);
-
-        if (count($errors) > 0) {
-            throw new ValidationFailedException(json_encode($errors));
-        } else {
-            $trips = $service->getTrips($filters, $limit, $page);
-        }
+        $trips = $this->service->getTrips($filters, $limit, $page);
 
         return new Response(
             $this->serializer->serialize($trips, 'json'),
@@ -113,19 +102,9 @@ class TripController extends AbstractController
         '/api/v1/save-trip',
         methods: 'POST'
     )]
-    public function saveTrip(Request $request, TripService $service): Response
+    public function saveTrip(#[RequestBody] TripListItem $item): Response
     {
-        $item = $this->serializer->deserialize(
-            $request->getContent(), TripListItem::class, 'json'
-        );
-
-        $errors = $this->validator->validate($item);
-
-        if (count($errors) > 0) {
-            throw new ValidationFailedException(json_encode($errors));
-        } else {
-            $service->saveTrip($item);
-        }
+        $this->service->saveTrip($item);
 
         return new Response('success',
             200,
