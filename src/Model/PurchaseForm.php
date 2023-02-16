@@ -5,39 +5,53 @@ namespace App\Model;
 use App\Const\CountryPhoneCode;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class PurchaseInListItem
+class PurchaseForm
 {
-    #[Assert\NotBlank]
+    #[Assert\NotNull]
     #[Assert\Positive]
     private int $trip;
 
-    #[Assert\NotBlank]
-    #[Assert\Choice(
-        callback: [CountryPhoneCode::class, 'names'],
-        message: 'Вибрано неправильний код країни')]
-    private string $country_code;
-
-    #[Assert\NotBlank]
-    #[Assert\Regex(
-        pattern: '/^[0-9]{9}$/',
-        message: 'Уведено неправильний номер телефону'
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(message: 'Оберіть код країни'),
+            new Assert\Choice(callback: [CountryPhoneCode::class, 'names'],
+                message: 'Вибрано неправильний код країни'),
+        ]
     )]
-    private string $phone_number;
+    private ?string $country_code = null;
+
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(message: 'Уведіть номер телефону'),
+            new Assert\Regex(
+                pattern: '/^[0-9]{9}$/',
+                message: 'Уведено неправильний номер телефону')
+        ]
+    )]
+    private ?string $phone_number = null;
 
     #[Assert\Email(message: 'Уведено неправильний e-mail')]
-    private ?string $email;
+    private ?string $email = null;
 
-    #[Assert\Length(
-        min: 2,
-        max: 50,
-        minMessage: 'Ім\'я має складатися мінімум з 2 символів',
-        maxMessage: 'Ім\'я має складатися максимум з 50 символів'
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(message: 'Уведіть ім\'я'),
+            new Assert\Length(
+                min: 2,
+                max: 50,
+                minMessage: 'Ім\'я має складатися мінімум з 2 символів',
+                maxMessage: 'Ім\'я має складатися максимум з 50 символів')
+        ]
     )]
-    private string $name;
+    private ?string $name = null;
 
-    #[Assert\NotBlank]
-    #[Assert\Positive(message: 'Уведіть правильну кількість')]
-    private int $people;
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(message: 'Уведіть кількість людей'),
+            new Assert\Positive(message: 'Кількість має бути більшою за 0')
+        ]
+    )]
+    private ?int $people = null;
 
     public function getTrip(): string
     {
@@ -51,24 +65,24 @@ class PurchaseInListItem
         return $this;
     }
 
-    public function getCountryCode(): string
+    public function getCountryCode(): ?string
     {
         return $this->country_code;
     }
 
-    public function setCountryCode(string $country_code): self
+    public function setCountryCode(?string $country_code): self
     {
         $this->country_code = $country_code;
 
         return $this;
     }
 
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): ?string
     {
         return $this->phone_number;
     }
 
-    public function setPhoneNumber(string $phone_number): self
+    public function setPhoneNumber(?string $phone_number): self
     {
         $this->phone_number = $phone_number;
 
@@ -87,24 +101,24 @@ class PurchaseInListItem
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getPeople(): int
+    public function getPeople(): ?int
     {
         return $this->people;
     }
 
-    public function setPeople(int $people): self
+    public function setPeople(?int $people): self
     {
         $this->people = $people;
 

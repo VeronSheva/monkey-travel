@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class PurchaseOutListItem
+class PurchaseListItem
 {
     private int $id;
 

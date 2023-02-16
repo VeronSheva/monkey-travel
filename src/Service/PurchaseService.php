@@ -6,9 +6,9 @@ use App\Entity\Purchase;
 use App\Exception\NotEnoughPlacesException;
 use App\Exception\PurchaseNotFoundException;
 use App\Exception\TripNotFoundException;
-use App\Model\PurchaseInListItem;
+use App\Model\PurchaseForm;
 use App\Model\PurchaseListResponse;
-use App\Model\PurchaseOutListItem;
+use App\Model\PurchaseListItem;
 use App\Repository\PurchaseRepository;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\Criteria;
@@ -31,7 +31,7 @@ class PurchaseService
 
         $trip = $this->tripRepository->findOneBy(['id' => $purchase->getTrip()])->getName();
 
-        $item = [(new PurchaseOutListItem())
+        $item = [(new PurchaseListItem())
                 ->setId($purchase->getId())
                 ->setTrip($trip)
                 ->setPhoneNumber($purchase->getPhoneNumber())
@@ -48,7 +48,7 @@ class PurchaseService
     {
         $purchases = $this->repository->findBy([], ['order_time' => Criteria::DESC]);
         $items = array_map(
-            fn (Purchase $purchase) => (new PurchaseOutListItem())
+            fn (Purchase $purchase) => (new PurchaseListItem())
             ->setId($purchase->getId())
             ->setTrip($this
                 ->tripRepository
@@ -65,7 +65,7 @@ class PurchaseService
         return new PurchaseListResponse($items);
     }
 
-    public function savePurchase(PurchaseInListItem $item): void
+    public function savePurchase(PurchaseForm $item): void
     {
         $price = $this->tripRepository->findOneBy(['id' => $item->getTrip()])->getPrice();
         $trip = $this->tripRepository->findOneBy(['id' => $item->getTrip()]);

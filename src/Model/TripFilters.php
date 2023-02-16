@@ -8,42 +8,58 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class TripFilters
 {
-    #[Assert\Type('array')]
+    #[Assert\Type('array',
+        message: 'Оберіть країну зі списку')]
     private array $countries = [];
 
-    #[Assert\PositiveOrZero]
+    #[Assert\PositiveOrZero(
+        message: 'Значення має бути не меншим за 0'
+    )]
     private ?int $min_sum = null;
 
-    #[Assert\Positive]
-    #[Assert\LessThanOrEqual(10000)]
+    #[Assert\Positive(
+        message: 'Значення має бути більшим за 0'
+    )]
+    #[Assert\LessThanOrEqual(10000,
+        message: 'Значення має бути не більшим за 10000'
+    )]
     private ?int $max_sum = null;
 
     /**
      * @var string A "d-m-Y" formatted value
      */
     #[Assert\NotEqualTo('')]
-    #[Assert\Date]
+    #[Assert\Date(
+        message: 'Оберіть валідну дату'
+    )]
     private ?string $date_start = null;
 
     /**
      * @var string A "d-m-Y" formatted value
      */
     #[Assert\NotEqualTo('')]
-    #[Assert\Date]
+    #[Assert\Date(
+        message: 'Оберіть валідну дату'
+    )]
     private ?string $date_end = null;
 
     #[Assert\Type('string')]
-    #[Assert\Choice(['price', 'date_start', 'id'])]
+    #[Assert\Choice(['price', 'date_start', 'id'],
+        message: 'Оберіть критерій сортування зі списку'
+    )]
     private ?string $sort_by = 'id';
 
     #[Assert\Type('string')]
-    #[Assert\Choice([Criteria::ASC, Criteria::DESC])]
+    #[Assert\Choice([Criteria::ASC, Criteria::DESC],
+        message: 'Оберіть порядок сортування зі списку'
+    )]
     private ?string $sort_order = Criteria::DESC;
 
     #[Assert\Type('string')]
     #[Assert\Length(
-        min: 1,
-        max: 50)]
+        max: 50,
+        maxMessage: 'Пошуковий запит має містити не більше 50 символів'
+    )]
     private ?string $search_query = null;
 
     public function getCountries(): array

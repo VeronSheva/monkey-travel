@@ -5,12 +5,12 @@ namespace App\Model;
 class PurchaseListResponse
 {
     /**
-     * @var PurchaseOutListItem[]
+     * @var PurchaseListItem[]
      */
     private array $items;
 
     /**
-     * @param PurchaseOutListItem[] $items
+     * @param PurchaseListItem[] $items
      */
     public function __construct(array $items)
     {
@@ -18,7 +18,7 @@ class PurchaseListResponse
     }
 
     /**
-     * @return PurchaseOutListItem[]
+     * @return PurchaseListItem[]
      */
     public function getItems(): array
     {

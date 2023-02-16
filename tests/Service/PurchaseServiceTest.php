@@ -6,7 +6,7 @@ use App\Entity\Purchase;
 use App\Entity\Trip;
 use App\Exception\PurchaseNotFoundException;
 use App\Model\PurchaseListResponse;
-use App\Model\PurchaseOutListItem;
+use App\Model\PurchaseListItem;
 use App\Repository\PurchaseRepository;
 use App\Repository\TripRepository;
 use App\Service\PurchaseService;
@@ -93,7 +93,7 @@ class PurchaseServiceTest extends AbstractTestCase
 
     private function createPurchaseListResponse(Trip $trip): PurchaseListResponse
     {
-        return new PurchaseListResponse([(new PurchaseOutListItem())
+        return new PurchaseListResponse([(new PurchaseListItem())
             ->setId(7)
             ->setTrip($trip->getName())
             ->setPhoneNumber('33333')

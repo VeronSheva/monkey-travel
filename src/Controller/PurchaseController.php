@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Attribute\RequestBody;
 use App\Const\CountryPhoneCode;
-use App\Model\PurchaseInListItem;
+use App\Model\PurchaseForm;
 use App\Service\PurchaseService;
 use App\Service\Serializer\DTOSerializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,7 +53,7 @@ class PurchaseController extends AbstractController
         'api/v1/save-purchase',
         methods: 'POST'
     )]
-    public function savePurchase(#[RequestBody] PurchaseInListItem $item): Response
+    public function savePurchase(#[RequestBody] PurchaseForm $item): Response
     {
         $this->service->savePurchase($item);
 
