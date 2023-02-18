@@ -41,8 +41,12 @@ class TripRepository extends ServiceEntityRepository
             ]);
 
         if (null !== $filters->getCountries()) {
-            foreach ($filters->getCountries() as $country) {
-                $query->andWhere('t.country = :country')->setParameter('country', $country);
+            foreach ($filters->getCountries() as $key => $country) {
+                if (0 === $key) {
+                    $query->andWhere('t.country = :country'.$key)->setParameter('country'.$key, $country);
+                } else {
+                    $query->orWhere('t.country = :country'.$key)->setParameter('country'.$key, $country);
+                }
             }
         }
 
@@ -64,7 +68,7 @@ class TripRepository extends ServiceEntityRepository
 
         if (null !== $filters->getSearchQuery()) {
             $query->andWhere('t.name LIKE :search')
-            ->setParameter('search', '%'.$filters->getSearchQuery().'%');
+                ->setParameter('search', '%'.$filters->getSearchQuery().'%');
         }
 
         $query->addOrderBy(null === $filters->getSortBy() ? 't.id' : 't.'.$filters->getSortBy(),
@@ -80,6 +84,20 @@ class TripRepository extends ServiceEntityRepository
         $updatedTrip = $trip;
         $updatedTrip->setFreePlaces($trip->getFreePlaces() - $purchase->getPeople());
         $this->getEntityManager()->flush();
+    }
+
+    public function getTripForPurchase(int $id): array
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->addSelect(
+                ['t.price',
+                    't.free_places'])
+            ->where('t.id = :id')
+            ->setParameter('id', $id);
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
     }
 
     public function add(Trip $entity, bool $flush = false): void

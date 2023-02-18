@@ -3,9 +3,8 @@
 namespace App\Exception;
 
 use JetBrains\PhpStorm\Pure;
-use RuntimeException;
 
-class TripNotFoundException extends RuntimeException
+class TripNotFoundException extends \RuntimeException
 {
     #[Pure]
     public function __construct()

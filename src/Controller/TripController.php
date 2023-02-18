@@ -81,7 +81,7 @@ class TripController extends AbstractController
     )]
     public function getCountries(): Response
     {
-        $countries = Countries::enumToArray();
+        $countries = Countries::values();
 
         return new Response(
             $this->serializer->serialize($countries, 'json'),

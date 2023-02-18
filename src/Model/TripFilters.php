@@ -8,8 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class TripFilters
 {
-    #[Assert\Type('array',
-        message: 'Оберіть країну зі списку')]
+    #[Assert\Type('array')]
     private array $countries = [];
 
     #[Assert\PositiveOrZero(
@@ -28,7 +27,9 @@ class TripFilters
     /**
      * @var string A "d-m-Y" formatted value
      */
-    #[Assert\NotEqualTo('')]
+    #[Assert\NotEqualTo('',
+        message: 'Оберіть валідну дату'
+    )]
     #[Assert\Date(
         message: 'Оберіть валідну дату'
     )]
@@ -37,25 +38,24 @@ class TripFilters
     /**
      * @var string A "d-m-Y" formatted value
      */
-    #[Assert\NotEqualTo('')]
+    #[Assert\NotEqualTo('',
+        message: 'Оберіть валідну дату'
+    )]
     #[Assert\Date(
         message: 'Оберіть валідну дату'
     )]
     private ?string $date_end = null;
 
-    #[Assert\Type('string')]
     #[Assert\Choice(['price', 'date_start', 'id'],
         message: 'Оберіть критерій сортування зі списку'
     )]
     private ?string $sort_by = 'id';
 
-    #[Assert\Type('string')]
     #[Assert\Choice([Criteria::ASC, Criteria::DESC],
         message: 'Оберіть порядок сортування зі списку'
     )]
     private ?string $sort_order = Criteria::DESC;
 
-    #[Assert\Type('string')]
     #[Assert\Length(
         max: 50,
         maxMessage: 'Пошуковий запит має містити не більше 50 символів'
@@ -158,17 +158,20 @@ class TripFilters
         return $this;
     }
 
-    #[Assert\IsTrue]
-    public function IsCountriesValid(): bool
+    #[Assert\IsTrue(
+        message: 'Оберіть країну зі списку'
+    )]
+    public function IsCountries(): bool
     {
         $countries = $this->countries;
+        $values = Countries::values();
 
         if (null === $countries) {
             return true;
         }
 
         foreach ($this->getCountries() as $country) {
-            if (!Countries::label($country)) {
+            if (!in_array($country, $values)) {
                 return false;
             }
         }

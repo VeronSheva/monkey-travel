@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use App\Const\Countries;
-use App\Const\CountryPhoneCode;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class TripListItem

@@ -67,13 +67,12 @@ class PurchaseService
 
     public function savePurchase(PurchaseForm $item): void
     {
-        $price = $this->tripRepository->findOneBy(['id' => $item->getTrip()])->getPrice();
-        $trip = $this->tripRepository->findOneBy(['id' => $item->getTrip()]);
+        $trip = $this->tripRepository->getTripForPurchase($item->getTrip());
 
-        if (null === $trip) {
+        if ([] === $trip) {
             throw new TripNotFoundException();
         } else {
-            $free_places = $trip->getFreePlaces();
+            $free_places = $trip[0]['free_places'];
             if ($free_places < $item->getPeople()) {
                 throw new NotEnoughPlacesException();
             }
@@ -87,10 +86,10 @@ class PurchaseService
             ->setName($item->getName())
             ->setOrderTime(date_create_immutable('now', new \DateTimeZone('Europe/Kyiv')))
             ->setPeople($item->getPeople())
-            ->setSum($price * $item->getPeople());
+            ->setSum($trip[0]['price'] * $item->getPeople());
         $this->repository->save($purchase, true);
 
-        $this->tripRepository->updateFreePlaces($trip, $purchase);
+        $this->tripRepository->updateFreePlaces($trip[0][0], $purchase);
     }
 
     public function deletePurchase(int $id): void

@@ -8,7 +8,7 @@ parameters:
     App\Exception\TripNotFoundException: { code: 404, hidden: false }
     App\Exception\PurchaseNotFoundException: { code: 404, hidden: false }
     App\Exception\ValidationException: { code: 400, hidden: false }
-    App\Exception\NotEnoughtPlacesException: { code: 400, hidden: false }
+    App\Exception\NotEnoughPlacesException: { code: 409, hidden: false }
 
 services:
   # default configuration for services in *this* file
