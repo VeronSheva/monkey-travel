@@ -58,7 +58,7 @@ class PurchaseController extends AbstractController
         $this->service->savePurchase($item);
 
         return new Response(
-            'success',
+            $this->serializer->serialize(['success'], 'json'),
             200,
             ['Content-Type' => 'application/json']);
     }

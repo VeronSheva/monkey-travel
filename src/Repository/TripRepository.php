@@ -79,10 +79,14 @@ class TripRepository extends ServiceEntityRepository
         return new Paginator($query, false);
     }
 
-    public function updateFreePlaces(Trip $trip, Purchase $purchase)
+    public function updateFreePlaces(Trip $trip, Purchase $purchase, bool $action)
     {
         $updatedTrip = $trip;
-        $updatedTrip->setFreePlaces($trip->getFreePlaces() - $purchase->getPeople());
+        if ($action) {
+            $updatedTrip->setFreePlaces($trip->getFreePlaces() + $purchase->getPeople());
+        } else {
+            $updatedTrip->setFreePlaces($trip->getFreePlaces() - $purchase->getPeople());
+        }
         $this->getEntityManager()->flush();
     }
 

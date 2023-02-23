@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Purchase;
-use App\Exception\NotEnoughPlacesException;
+use App\Exception\UserAlreadyExistsException;
 use App\Exception\PurchaseNotFoundException;
 use App\Exception\TripNotFoundException;
 use App\Model\PurchaseForm;
@@ -74,7 +74,7 @@ class PurchaseService
         } else {
             $free_places = $trip[0]['free_places'];
             if ($free_places < $item->getPeople()) {
-                throw new NotEnoughPlacesException();
+                throw new UserAlreadyExistsException();
             }
         }
 
@@ -89,17 +89,18 @@ class PurchaseService
             ->setSum($trip[0]['price'] * $item->getPeople());
         $this->repository->save($purchase, true);
 
-        $this->tripRepository->updateFreePlaces($trip[0][0], $purchase);
+        $this->tripRepository->updateFreePlaces($trip[0][0], $purchase, false);
     }
 
     public function deletePurchase(int $id): void
     {
         $purchase = $this->repository->findOneBy(['id' => $id]);
+        $trip = $this->tripRepository->getTripForPurchase($purchase->getTrip());
 
         if (null === $purchase) {
             throw new PurchaseNotFoundException();
         }
-
+        $this->tripRepository->updateFreePlaces($trip[0][0], $purchase, true);
         $this->repository->remove($purchase, true);
     }
 }

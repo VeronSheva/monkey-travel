@@ -4,9 +4,11 @@ namespace App\Tests\Service;
 
 use App\Entity\Trip;
 use App\Exception\TripNotFoundException;
+use App\Model\TripFilters;
 use App\Model\TripListItem;
 use App\Model\TripListResponse;
 use App\Repository\TripRepository;
+use App\Service\PaginateHelperService;
 use App\Service\TripService;
 use App\Tests\AbstractTestCase;
 use Doctrine\Common\Collections\Criteria;
@@ -22,30 +24,28 @@ class TripServiceTest extends AbstractTestCase
             ->with(['id' => 7])
             ->willReturn(null);
 
-        $validator = $this->createMock(ValidatorInterface::class);
-
         $this->expectException(TripNotFoundException::class);
 
-        (new TripService($repository, $validator))->getTripByID(7);
+        (new TripService($repository))->getTripByID(7);
     }
 
-    public function testGetTrips(): void
+    public function testGetTrips(int $page = 1, int $limit = 5): void
     {
         $trip = $this->createTripEntity();
+        $offset = max($page - 1, 0) * $limit;
 
         $repository = $this->createMock(TripRepository::class);
+        $filters = new TripFilters();
+
+        $service = new TripService($repository);
         $repository->expects($this->once())
-            ->method('findBy')
-            ->with([], ['price' => Criteria::ASC])
+            ->method('getFilteredTrips')
+            ->with($filters, $offset, $page)
             ->willReturn([$trip]);
 
-        $validator = $this->createMock(ValidatorInterface::class);
+        $expected = $this->createTripListResponse($trip);
 
-        $service = new TripService($repository, $validator);
-
-        $expected = $this->createTripListResponse();
-
-        $this->assertEquals($expected, $service->getTrips());
+        $this->assertEquals($expected, $service->getTrips($filters, $limit, $page));
     }
 
     private function createTripEntity(): Trip
@@ -63,15 +63,10 @@ class TripServiceTest extends AbstractTestCase
         return $trip;
     }
 
-    private function createTripListResponse(): TripListResponse
+    private function createTripListResponse(Trip $trips, int $limit, int $page ): TripListResponse
     {
-        return new TripListResponse([(new TripListItem())
-            ->setId(7)
-            ->setName('test')
-            ->setDescription('test')
-            ->setPrice(200)
-            ->setDuration(10)
-            ->setDateStart('2000-02-02 00:00:00')
-            ->setDateEnd('2000-02-12 00:00:00'), ]);
+        $pagination = new PaginateHelperService($trips->count(), $limit, $page);
+
+        return new TripListResponse($trips);
     }
 }

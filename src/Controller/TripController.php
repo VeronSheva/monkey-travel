@@ -106,7 +106,7 @@ class TripController extends AbstractController
     {
         $this->service->saveTrip($item);
 
-        return new Response('success',
+        return new Response('',
             200,
             ['Content-Type' => 'application/json']
         );
