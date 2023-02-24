@@ -3,12 +3,12 @@
 namespace App\Service;
 
 use App\Entity\Purchase;
-use App\Exception\UserAlreadyExistsException;
 use App\Exception\PurchaseNotFoundException;
 use App\Exception\TripNotFoundException;
+use App\Exception\UserAlreadyExistsException;
 use App\Model\PurchaseForm;
-use App\Model\PurchaseListResponse;
 use App\Model\PurchaseListItem;
+use App\Model\PurchaseListResponse;
 use App\Repository\PurchaseRepository;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\Criteria;
@@ -84,7 +84,6 @@ class PurchaseService
             ->setPhoneNumber($item->getPhoneNumber())
             ->setEmail($item->getEmail())
             ->setName($item->getName())
-            ->setOrderTime(date_create_immutable('now', new \DateTimeZone('Europe/Kyiv')))
             ->setPeople($item->getPeople())
             ->setSum($trip[0]['price'] * $item->getPeople());
         $this->repository->save($purchase, true);

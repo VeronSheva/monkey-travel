@@ -37,6 +37,12 @@ class Purchase
     #[ORM\Column]
     private int $sum;
 
+    #[ORM\PrePersist]
+    public function setOrderTimeValue(): void
+    {
+        $this->order_time = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Kyiv'));
+    }
+
     public function getId(): ?int
     {
         return $this->id;
