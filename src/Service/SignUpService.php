@@ -26,7 +26,9 @@ class SignUpService
         }
 
         $user = (new User())
-            ->setEmail($request->getEmail());
+            ->setEmail($request->getEmail())
+            ->setRoles(['ROLE_USER']);
+
 
         $user->setPassword($this->hasher->hashPassword($user, $request->getPassword()));
 

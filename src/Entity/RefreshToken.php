@@ -9,6 +9,7 @@ use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: RefreshTokenRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 /**
  * @ORM\Entity
  *
