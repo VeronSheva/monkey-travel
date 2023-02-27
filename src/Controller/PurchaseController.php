@@ -4,9 +4,13 @@ namespace App\Controller;
 
 use App\Attribute\RequestBody;
 use App\Const\CountryPhoneCode;
+use App\Model\ErrorResponse;
 use App\Model\PurchaseForm;
+use App\Model\PurchaseListResponse;
 use App\Service\PurchaseService;
 use App\Service\Serializer\DTOSerializer;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,8 +23,23 @@ class PurchaseController extends AbstractController
     ) {
     }
 
+    /**
+     * @OA\Response (
+     *     response=200,
+     *     description="Returns one purchase with a certain id",
+     *
+     *     @Model(type=PurchaseListResponse::class)
+     * )
+     *
+     * @OA\Response (
+     *     response=404,
+     *     description="Purchase not found",
+     *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     */
     #[Route(
-        '/api/v1/get-purchase/{id}',
+        '/api/v1/admin/get-purchase/{id}',
         methods: 'GET'
     )]
     public function getPurchaseById(int $id): Response
@@ -34,8 +53,28 @@ class PurchaseController extends AbstractController
         );
     }
 
+    /**
+     * @OA\Response (
+     *     response=200,
+     *     description="Returns all purchases",
+     *
+     *     @Model(type=PurchaseListResponse::class)
+     * )
+     * @OA\Response (
+     *     response=404,
+     *     description="Filter validation failed",
+     *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     * @OA\Response (
+     *     response=400,
+     *     description="Error while unmarshalling request body",
+     *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     */
     #[Route(
-        '/api/v1/get-purchases',
+        '/api/v1/admin/get-purchases',
         methods: 'GET'
     )]
     public function getPurchases(): Response
@@ -49,6 +88,32 @@ class PurchaseController extends AbstractController
         );
     }
 
+    /**
+     * @OA\Response (
+     *     response=200,
+     *     description="Returns all purchases",
+     *
+     *     @Model(type=PurchaseListResponse::class)
+     * )
+     * @OA\Response (
+     *     response=404,
+     *     description="Filter validation failed",
+     *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     * @OA\Response (
+     *     response=400,
+     *     description="Error while unmarshalling request body",
+     *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     * @OA\Response (
+     *     response=409,
+     *     description="Not enough places for this trip",
+     *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     */
     #[Route(
         'api/v1/save-purchase',
         methods: 'POST'
@@ -63,6 +128,13 @@ class PurchaseController extends AbstractController
             ['Content-Type' => 'application/json']);
     }
 
+
+    /**
+     * @OA\Response (
+     *     response=200,
+     *     description="Returns the enum CountryPhoneCode in a form of array",
+     * )
+     */
     #[Route(
         'api/v1/get-country-codes',
         methods: 'GET'
@@ -79,8 +151,21 @@ class PurchaseController extends AbstractController
         );
     }
 
+    /**
+     * @OA\Response (
+     *     response=200,
+     *     description="Deletes a purchase from database",
+     *
+     * )
+     * @OA\Response (
+     *     response=404,
+     *     description="Purchase not found",
+     *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     */
     #[Route(
-        '/api/v1/delete-purchase/{id}',
+        '/api/v1/admin/delete-purchase/{id}',
         methods: 'POST'
     )]
     public function deletePurchase(int $id): Response

@@ -6,6 +6,7 @@
 parameters:
   exceptions:
     App\Exception\TripNotFoundException: { code: 404, hidden: false }
+    App\Exception\RequestBodyConvertException: { code: 400, hidden: false }
     App\Exception\UserNotFoundException: { code: 404, hidden: false }
     App\Exception\PurchaseNotFoundException: { code: 404, hidden: false }
     App\Exception\ValidationException: { code: 400, hidden: false }

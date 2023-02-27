@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Attribute\RequestBody;
 use App\Model\ErrorResponse;
-use App\Model\IdResponse;
 use App\Model\SignUpRequest;
 use App\Service\SignUpService;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -24,19 +23,20 @@ class AuthController extends AbstractController
      *     response=200,
      *     description = "Signs up a user",
      *
-     *     @Model(type=IdResponse::class)
+     *     @OA\JsonContent(
+     *         @OA\Property(property="token", type="string"),
+     *         @OA\Property(property="refresh_token", type="string")
+     *     )
      * )
-     *
      * @OA\Response (
      *     response=409,
-     *     description = "This user already exists",
+     *     description="This user already exists",
      *
      *     @Model(type=ErrorResponse::class)
      * )
-     *
      * @OA\Response (
      *     response=400,
-     *     description = "Validation failed",
+     *     description="Validation failed",
      *
      *     @Model(type=ErrorResponse::class)
      * )

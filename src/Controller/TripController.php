@@ -15,7 +15,6 @@ use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class TripController extends AbstractController
 {
@@ -28,13 +27,16 @@ class TripController extends AbstractController
     /**
      * @OA\Response (
      *     response=200,
-     *     description = "Returns one trip with a certain id",
-     *     @Model(type = TripListResponse::class)
+     *     description="Returns one trip with a certain id",
+     *
+     *     @Model(type=TripListResponse::class)
      * )
+     *
      * @OA\Response (
-     *     response = 404,
-     *     description = "Trip not found",
-     *     @Model(type = ErrorResponse::class)
+     *     response=404,
+     *     description="Trip not found",
+     *
+     *     @Model(type=ErrorResponse::class)
      * )
      */
     #[Route(
@@ -54,10 +56,24 @@ class TripController extends AbstractController
 
     /**
      * @OA\Response (
-     *     response = 200,
-     *     description = "Returns all trips ordered by price",
+     *     response=200,
+     *     description="Returns filtered trips",
      *
-     *     @Model (type = TripListResponse::class)
+     *     @Model(type=TripListResponse::class)
+     * )
+     *
+     * @OA\Response (
+     *     response=404,
+     *     description="Filter validation failed",
+     *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     *
+     * @OA\Response (
+     *     response=400,
+     *     description="Error while unmarshalling request body",
+     *
+     *     @Model(type=ErrorResponse::class)
      * )
      */
     #[Route(
@@ -75,6 +91,12 @@ class TripController extends AbstractController
         );
     }
 
+    /**
+     * @OA\Response (
+     *     response=200,
+     *     description="Returns an array with a country in Ukrainian as a value",
+     * )
+     */
     #[Route(
         '/api/v1/get-countries',
         methods: 'GET'
@@ -95,11 +117,22 @@ class TripController extends AbstractController
      * @OA\Response(
      *     response=200,
      *     description="Saves a new trip to database",
+     * )
+     *  @OA\Response (
+     *     response=404,
+     *     description="Validation failed",
      *
+     *     @Model(type=ErrorResponse::class)
+     * )
+     * @OA\Response (
+     *     response=400,
+     *     description="Error while unmarshalling request body",
+     *
+     *     @Model(type=ErrorResponse::class)
      * )
      */
     #[Route(
-        '/api/v1/save-trip',
+        '/api/v1/admin/save-trip',
         methods: 'POST'
     )]
     public function saveTrip(#[RequestBody] TripListItem $item): Response
@@ -114,18 +147,19 @@ class TripController extends AbstractController
 
     /**
      * @OA\Response (
-     *     response = 200,
-     *     description = "Deletes a trip from database",
+     *     response=200,
+     *     description="Deletes a trip from database",
      *
      * )
      * @OA\Response (
-     *     response = 404,
-     *     description = "Trip not found",
-     *     @Model(type = ErrorResponse::class)
+     *     response=404,
+     *     description="Trip not found",
+     *
+     *     @Model(type=ErrorResponse::class)
      * )
      */
     #[Route(
-        '/api/v1/delete-trip/{id}',
+        '/api/v1/admin/delete-trip/{id}',
         methods: 'POST'
     )]
     public function deleteTrip(int $id, TripService $service): Response

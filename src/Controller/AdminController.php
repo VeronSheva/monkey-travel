@@ -19,11 +19,11 @@ class AdminController extends AbstractController
     /**
      * @OA\Response (
      *     response=200,
-     *     description = "Promote user to admin",
+     *     description="Promote user to admin",
      * )
      * @OA\Response (
      *     response=404,
-     *     description = "User not found",
+     *     description="User not found",
      *
      *     @Model(type=ErrorResponse::class)
      * )

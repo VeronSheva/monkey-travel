@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use OpenApi\Annotations as OA;
+
 class TripListResponse
 {
     /**
@@ -17,8 +19,8 @@ class TripListResponse
         private ?array $pagination = null,
         private ?int $currentPage = null,
         private ?int $perPage = null,
-        private ?int $total = null,)
-    {
+        private ?int $total = null,
+    ) {
         $this->items = $items;
     }
 
@@ -30,6 +32,9 @@ class TripListResponse
         return $this->items;
     }
 
+    /**
+     * @OA\Property(type="array", @OA\Items(type="string"))
+     */
     public function getPagination(): ?array
     {
         return $this->pagination;
