@@ -23,7 +23,7 @@ security:
             entry_point: jwt
             json_login:
                 check_path: api_login_check
-                success_handler: lexik_jwt_authentication.handler.authentication_success
+                success_handler: App\Security\AuthenticationSuccessHandler
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: ~
             refresh_jwt:
